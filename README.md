@@ -14,6 +14,9 @@ I. Štajduhar, M. Mamula, D. Miletić, G. Unal, Semi-automated detection of ante
 
 ## Train
 
+``CUDA_VISIBLE_DEVICES=1 python train.py --rundir /home/C00579118/MRNet-Baseline/abnormal --task abnormal --epochs 50 --gpu --learning_rate 1e-4``
+
+
 `python train.py --rundir [experiment name] --diagnosis 0 --gpu`
 
 - diagnosis is highest diagnosis allowed for negative label (0 = injury task, 1 = tear task)
