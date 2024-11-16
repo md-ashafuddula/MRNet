@@ -36,7 +36,7 @@ list of installed packages in mr_env are,
 
 ```
 conda list
-# packages in environment at /home/C00579118/miniconda3/envs/mrnet_env:
+
 #
 # Name                    Version                   Build  Channel
 _libgcc_mutex             0.1                 conda_forge    conda-forge
