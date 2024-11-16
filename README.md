@@ -1,21 +1,23 @@
-# MRNet
+# Placed 3rd in [MRNet competition](https://stanfordmlgroup.github.io/competitions/mrnet/)
+## Triple-MRNet (single model) Independent Researcher 
 
-Dataset from Clinical Hospital Centre Rijeka, Croatia, originally appears in:
+Results are not up to the mark, after running for 50 epoch each for abnormal, acl and meniscus serially I got,
+
+```
+AUC: 0.8455 for Abnormal
+AUC: 0.7371 for ACL
+AUC: 0.8054 for Meniscus
+```
+
+
+This is **not** actual base model from paper [MRNet](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1002699)
+
+**Internal Dataset** from [Stanford ML Group](https://stanfordmlgroup.github.io/competitions/mrnet/)
+**External Dataset** from Clinical Hospital Centre Rijeka, Croatia, originally appears in:
 
 I. Štajduhar, M. Mamula, D. Miletić, G. Unal, Semi-automated detection of anterior cruciate ligament injury from MRI, Computer Methods and Programs in Biomedicine, Volume 140, 2017, Pages 151–164. (http://www.riteh.uniri.hr/~istajduh/projects/kneeMRI/data/Stajduhar2017.pdf)
 
-## Setup
-
-`bash download.sh` (caution: downloads ~6.68 GB of data)
-
-`conda env create -f environment.yml`
-
-`source activate mrnet`
-
-## Train
-
-``CUDA_VISIBLE_DEVICES=1 python train.py --rundir /home/C00579118/MRNet-Baseline/abnormal --task abnormal --epochs 50 --gpu --learning_rate 1e-4``
-
+## General Train
 
 `python train.py --rundir [experiment name] --diagnosis 0 --gpu`
 
@@ -24,15 +26,15 @@ I. Štajduhar, M. Mamula, D. Miletić, G. Unal, Semi-automated detection of ante
 - prints training & validation metrics (loss & AUC) after each epoch
 - models saved at `[experiment-name]/[val_loss]_[train_loss]_epoch[epoch_num]`
 
-## Evaluate
+## General Evaluate
 
 `python evaluate.py --split [train/valid/test] --diagnosis 0 --model_path [experiment-name]/[val_loss]_[train_loss]_epoch[epoch_num] --gpu`
 
 - prints loss & AUC
 
-## README-2 (Implementation Hints)
+## README-2 (Actual Implementation Hints)
 
-list of installed packages in mr_env are,
+list of installed packages in ``mr_env`` are,
 
 ```
 conda list
@@ -146,6 +148,8 @@ To train the model for abnormality detection, ACL tear detection, and meniscus t
     * Similarly, use the abnormal model as the base and fine-tune it for meniscus detection.
 
 ## Train model,
+
+**Set CUDA manually:** ``CUDA_VISIBLE_DEVICES=1 python train.py --rundir /home/C00579118/MRNet-Baseline/abnormal --task abnormal --epochs 50 --gpu --learning_rate 1e-4``
 
 1. ``python train.py --rundir`` **<path_to_save_abnormal_model>** ``--task abnormal --backbone alexnet --epochs 50 --learning_rate 1e-5 --gpu``
 
